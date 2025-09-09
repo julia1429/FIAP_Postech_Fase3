@@ -2,7 +2,6 @@ package agendamentoAPI.postech_fase3.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import agendamentoAPI.postech_fase3.model.User;
 
 import java.time.LocalDateTime;
 

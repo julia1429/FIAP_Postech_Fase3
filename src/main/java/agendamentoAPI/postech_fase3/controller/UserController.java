@@ -1,7 +1,6 @@
 package agendamentoAPI.postech_fase3.controller;
 
 import agendamentoAPI.postech_fase3.model.User;
-import agendamentoAPI.postech_fase3.repository.UserRepository;
 import agendamentoAPI.postech_fase3.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
