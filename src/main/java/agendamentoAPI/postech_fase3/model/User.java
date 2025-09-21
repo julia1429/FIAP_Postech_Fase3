@@ -1,5 +1,8 @@
 package agendamentoAPI.postech_fase3.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +20,9 @@ public class User {
     private String nome;
     private String telefone;
     private String email;
+    private String senha;
 
-    @Enumerated(EnumType.STRING)
-    private Role role; // MÉDICO, ENFERMEIRO, PACIENTE
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinTable(name = "user_types_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 }

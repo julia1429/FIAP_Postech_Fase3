@@ -1,9 +1,12 @@
 package agendamentoAPI.postech_fase3.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -19,14 +22,20 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name = "roles")
-public class Role {
-
-	@Id
+@Table(name = "password_reset_token") 
+public class PasswordResetToken {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String token;
 
+    @OneToOne
+    private User user;
 
+    private LocalDateTime expiration;
+
+    public boolean isExpired() {
+        return LocalDateTime.now().isAfter(expiration);
+    }
 }
