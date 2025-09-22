@@ -1,6 +1,6 @@
 package agendamentoAPI.postech_fase3.service;
 
-import agendamentoAPI.postech_fase3.DTO.AppointmentDTO;
+import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
 import agendamentoAPI.postech_fase3.model.Appointment;
 import agendamentoAPI.postech_fase3.model.User;
 import agendamentoAPI.postech_fase3.repository.AppointmentRepository;

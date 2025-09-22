@@ -1,4 +1,4 @@
-package agendamentoAPI.postech_fase3.DTO;
+package agendamentoAPI.postech_fase3.dto;
 
 import lombok.Data;
 

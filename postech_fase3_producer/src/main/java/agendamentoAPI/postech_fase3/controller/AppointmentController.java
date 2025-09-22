@@ -1,10 +1,9 @@
 package agendamentoAPI.postech_fase3.controller;
 
-import agendamentoAPI.postech_fase3.DTO.AppointmentDTO;
+import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
 import agendamentoAPI.postech_fase3.model.Appointment;
 import agendamentoAPI.postech_fase3.service.AppointmentProducer;
 import agendamentoAPI.postech_fase3.service.AppointmentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
