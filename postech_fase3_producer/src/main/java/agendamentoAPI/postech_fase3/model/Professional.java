@@ -1,23 +1,22 @@
 package agendamentoAPI.postech_fase3.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name="professionals")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Professional {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    private String phone;
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    private Role role; // MÉDICO, ENFERMEIRO, PACIENTE
+    private String specialty;
 }

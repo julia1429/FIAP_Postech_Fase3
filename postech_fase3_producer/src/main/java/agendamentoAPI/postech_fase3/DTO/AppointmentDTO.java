@@ -6,11 +6,8 @@ import java.util.Date;
 
 @Data
 public class AppointmentDTO {
-    private Long pacienteId;
-    private Long profissionalId;
-    private Date dataHora;
-
-    private String email;
-    private String telefone;
+    private Long userId;
+    private Long professionalId;
+    private Date appointmentDateTime;
 
 }
