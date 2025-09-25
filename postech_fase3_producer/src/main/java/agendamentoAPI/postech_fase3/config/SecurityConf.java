@@ -52,7 +52,7 @@ public class SecurityConf {
 	    String hierarchy = "ROLE_MEDICO > ROLE_ENFERMEIRO > ROLE_PACIENTE";
 	    roleHierarchyImpl.setHierarchy(hierarchy);
 	    return roleHierarchyImpl;
-	}*/
+	}
 
 	@Bean
 	public MethodSecurityExpressionHandler methodSecurityExpressionHandler(RoleHierarchy roleHierarchy) {
@@ -60,7 +60,7 @@ public class SecurityConf {
 		expressionHandler.setRoleHierarchy(roleHierarchy);
 		return expressionHandler;
 	}
-	
+	*/
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();

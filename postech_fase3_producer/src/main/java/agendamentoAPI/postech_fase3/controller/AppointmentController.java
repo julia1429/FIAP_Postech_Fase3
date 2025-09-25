@@ -72,7 +72,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.listAll());
     }
     
-    @GetMapping
+    @GetMapping("/patient")
     @PreAuthorize("hasRole('PACIENTE')")
     public ResponseEntity<List<Appointment>> listPatientAll() {
         return ResponseEntity.ok(appointmentService.listPatientAll());
