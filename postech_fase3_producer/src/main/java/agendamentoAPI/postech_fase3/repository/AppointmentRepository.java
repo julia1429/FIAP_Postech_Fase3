@@ -1,8 +1,13 @@
 package agendamentoAPI.postech_fase3.repository;
 
-import agendamentoAPI.postech_fase3.model.Appointment;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import agendamentoAPI.postech_fase3.model.Appointment;
 
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+	
+    List<Appointment> findAllByPatientId(Long patientId);
 }

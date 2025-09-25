@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -47,13 +46,13 @@ public class SecurityConf {
 	            .build();
 	}
 	
-	@Bean
+	/*@Bean
 	public RoleHierarchy roleHierarchy() {
 	    RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
 	    String hierarchy = "ROLE_MEDICO > ROLE_ENFERMEIRO > ROLE_PACIENTE";
 	    roleHierarchyImpl.setHierarchy(hierarchy);
 	    return roleHierarchyImpl;
-	}
+	}*/
 
 	@Bean
 	public MethodSecurityExpressionHandler methodSecurityExpressionHandler(RoleHierarchy roleHierarchy) {

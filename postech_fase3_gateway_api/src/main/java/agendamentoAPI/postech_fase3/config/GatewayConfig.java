@@ -18,15 +18,12 @@ public class GatewayConfig {
                 
                 .uri("http://localhost:8081"))
 
-            // Rota para pacientes
-            .route("patients", r -> r.path("/patients/**")
-                .filters(f -> f.rewritePath("/patients/(?<path>.*)", "/${path}"))
-                .uri("http://localhost:8082"))
-
-            // Rota para médicos (API externa)
+        
+            // TODO ANOTHER API
+            /*
             .route("doctors", r -> r.path("/doctors/**")
                 .uri("https://external-api-hospital.com"))
-
+             */
             .build();
     }
 }

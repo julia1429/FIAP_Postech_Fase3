@@ -1,14 +1,17 @@
 package agendamentoAPI.postech_fase3.service;
 
+import java.util.List;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
 import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
 import agendamentoAPI.postech_fase3.model.Appointment;
+import agendamentoAPI.postech_fase3.model.AuthenticatedUser;
 import agendamentoAPI.postech_fase3.model.User;
 import agendamentoAPI.postech_fase3.repository.AppointmentRepository;
 import agendamentoAPI.postech_fase3.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
@@ -55,7 +58,13 @@ public class AppointmentService {
     public void delete(Long id) {
         appointmentRepository.deleteById(id);
     }
+    
     public List<Appointment> listAll() {
         return appointmentRepository.findAll();
+    }
+    
+    public List<Appointment> listPatientAll() {
+		AuthenticatedUser userAuth =  (AuthenticatedUser)   SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return appointmentRepository.findAllByPatientId(userAuth.getId());
     }
 }

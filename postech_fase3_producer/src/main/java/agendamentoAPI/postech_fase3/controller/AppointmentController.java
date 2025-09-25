@@ -17,7 +17,6 @@ import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
 import agendamentoAPI.postech_fase3.model.Appointment;
 import agendamentoAPI.postech_fase3.service.AppointmentProducer;
 import agendamentoAPI.postech_fase3.service.AppointmentService;
-import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/appointments")
@@ -34,6 +33,7 @@ public class AppointmentController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ENFERMEIRO')")
     public ResponseEntity<AppointmentDTO> create(@RequestBody AppointmentDTO dto) {
 
         Appointment appointment = appointmentService.create(dto);
@@ -45,7 +45,9 @@ public class AppointmentController {
 
         return ResponseEntity.ok(dto);
     }
+    
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ENFERMEIRO')")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO dto) {
         Appointment appointment = appointmentService.update(id, dto);
 
@@ -58,6 +60,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ENFERMEIRO')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         appointmentService.delete(id);
         return ResponseEntity.noContent().build();
@@ -67,5 +70,11 @@ public class AppointmentController {
     @PreAuthorize("hasRole('ENFERMEIRO')")
     public ResponseEntity<List<Appointment>> listAll() {
         return ResponseEntity.ok(appointmentService.listAll());
+    }
+    
+    @GetMapping
+    @PreAuthorize("hasRole('PACIENTE')")
+    public ResponseEntity<List<Appointment>> listPatientAll() {
+        return ResponseEntity.ok(appointmentService.listPatientAll());
     }
 }
