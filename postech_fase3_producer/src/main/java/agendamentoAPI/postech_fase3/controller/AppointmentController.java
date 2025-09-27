@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
+import agendamentoAPI.postech_fase3.dto.AppointmentDetailsDTO;
 import agendamentoAPI.postech_fase3.model.Appointment;
 import agendamentoAPI.postech_fase3.service.AppointmentProducer;
 import agendamentoAPI.postech_fase3.service.AppointmentService;
@@ -34,29 +35,23 @@ public class AppointmentController {
 
     @PostMapping
     @PreAuthorize("hasRole('ENFERMEIRO')")
-    public ResponseEntity<AppointmentDTO> create(@RequestBody AppointmentDTO dto) {
+    public ResponseEntity<AppointmentDetailsDTO> create(@RequestBody AppointmentDTO dto) {
 
-        Appointment appointment = appointmentService.create(dto);
+        AppointmentDetailsDTO details = appointmentService.create(dto);
 
-        appointmentProducer.sendAppointmentMessage(appointment);
+        appointmentProducer.sendAppointmentMessage(details);
 
-        dto.setEmail(appointment.getPaciente().getEmail());
-        dto.setTelefone(appointment.getPaciente().getTelefone());
-
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(details);
     }
     
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ENFERMEIRO')")
-    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO dto) {
-        Appointment appointment = appointmentService.update(id, dto);
+    public ResponseEntity<AppointmentDetailsDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO dto) {
+        AppointmentDetailsDTO details = appointmentService.update(id, dto);
 
-        appointmentProducer.sendAppointmentMessage(appointment);
+        appointmentProducer.sendAppointmentMessage(details);
 
-        dto.setEmail(appointment.getPaciente().getEmail());
-        dto.setTelefone(appointment.getPaciente().getTelefone());
-
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(details);
     }
 
     @DeleteMapping("/{id}")

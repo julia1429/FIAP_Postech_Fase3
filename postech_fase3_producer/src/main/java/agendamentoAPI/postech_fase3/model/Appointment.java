@@ -17,13 +17,13 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date dataHora;
+    private Date dateTime;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id")
-    private User paciente;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "profissional_id")
-    private User profissional; // médico ou enfermeiro
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "professional_id")
+    private Professional professional;
 }

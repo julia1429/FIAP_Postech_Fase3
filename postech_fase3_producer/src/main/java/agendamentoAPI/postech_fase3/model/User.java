@@ -23,9 +23,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String cpf;
-    private String telefone;
+    private String name;
+    private String phone;
     private String email;
 
     @Enumerated(EnumType.STRING)

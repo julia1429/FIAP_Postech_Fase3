@@ -1,6 +1,7 @@
 package agendamentoAPI.postech_fase3.service;
 
 import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
+import agendamentoAPI.postech_fase3.dto.AppointmentDetailsDTO;
 import agendamentoAPI.postech_fase3.model.Appointment;
 import agendamentoAPI.postech_fase3.model.User;
 import agendamentoAPI.postech_fase3.repository.UserRepository;
@@ -24,17 +25,7 @@ public class AppointmentProducer {
         this.userRepository = userRepository;
     }
 
-    public void sendAppointmentMessage(Appointment appointment) {
-        User paciente = appointment.getPaciente();
-
-        AppointmentDTO dto = new AppointmentDTO();
-        dto.setPacienteId(paciente.getId());
-        dto.setProfissionalId(appointment.getProfissional().getId());
-        dto.setDataHora(appointment.getDataHora());
-        dto.setEmail(paciente.getEmail());
-        dto.setTelefone(paciente.getTelefone());
-
-
+    public void sendAppointmentMessage(AppointmentDetailsDTO dto) {
         rabbitTemplate.convertAndSend(exchange, routingKey, dto);
         System.out.println("📤 Evento de consulta criada enviado para RabbitMQ: " + dto);
     }
