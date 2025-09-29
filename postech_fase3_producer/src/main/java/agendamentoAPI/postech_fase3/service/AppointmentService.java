@@ -71,7 +71,7 @@ public class AppointmentService {
        dto.setUserName(appointment.getUser().getName());
        dto.setUserEmail(appointment.getUser().getEmail());
        dto.setUserPhone(appointment.getUser().getPhone());
-       dto.setProfessionalName(appointment.getProfessional().getName());
+       dto.setProfessionalName(appointment.getProfessional().getUser().getName());
        dto.setProfessionalSpecialty(appointment.getProfessional().getSpecialty());
        dto.setAppointmentDateTime(appointment.getDateTime());
        return dto;

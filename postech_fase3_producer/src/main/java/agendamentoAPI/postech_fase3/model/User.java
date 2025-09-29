@@ -20,4 +20,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role; // MÉDICO, ENFERMEIRO, PACIENTE
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Professional professional;
 }
