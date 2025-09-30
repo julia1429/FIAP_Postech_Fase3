@@ -33,6 +33,8 @@ public class JWTService {
         return JWT.create()
                 .withSubject(user.getEmail())
                 .withClaim("roles", rolesList)
+                .withClaim("id", user.getId())
+                .withClaim("email", user.getEmail())
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 100 * 60 * 60)) // 100h
                 .sign(Algorithm.HMAC256(jwtSecret));
