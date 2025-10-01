@@ -9,5 +9,5 @@ import agendamentoAPI.postech_fase3.model.Appointment;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 	
-    List<Appointment> findAllByPacienteId(Long patientId);
+    List<Appointment> findAllById(Long patientId);
 }

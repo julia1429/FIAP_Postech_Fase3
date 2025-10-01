@@ -97,6 +97,6 @@ public class AppointmentService {
     
     public List<Appointment> listPatientAll() {
 		AuthenticatedUser userAuth =  (AuthenticatedUser)   SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return appointmentRepository.findAllByPacienteId(userAuth.getId());
+        return appointmentRepository.findAllById(userAuth.getId());
     }
 }
