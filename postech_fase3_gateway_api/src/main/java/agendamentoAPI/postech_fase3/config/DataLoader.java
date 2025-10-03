@@ -1,6 +1,7 @@
 package agendamentoAPI.postech_fase3.config;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
@@ -47,8 +48,8 @@ public class DataLoader implements CommandLineRunner {
 		medico.setSenha(passwordEncoder.encode("123"));
 		userTypesRoles.add(roleMedico);
 		medico.setRoles(userTypesRoles);
-		var save = userRepository.save(medico);
-		
+		Optional.of(userRepository.findByEmail(medico.getEmail())
+				.orElseGet(() -> userRepository.save(medico)));
 		
 		userTypesRoles = new HashSet<>();
 		
@@ -58,7 +59,8 @@ public class DataLoader implements CommandLineRunner {
 		enfermeiro.setSenha(passwordEncoder.encode("123"));
 		userTypesRoles.add(roleEnfermeiro);
 		enfermeiro.setRoles(userTypesRoles);
-	    save = userRepository.save(enfermeiro);
+		Optional.of(userRepository.findByEmail(enfermeiro.getEmail())
+				.orElseGet(() -> userRepository.save(enfermeiro)));
 		
 	    userTypesRoles = new HashSet<>();
 	    
@@ -68,7 +70,8 @@ public class DataLoader implements CommandLineRunner {
 		paciente.setSenha(passwordEncoder.encode("123"));
 		userTypesRoles.add(rolePaciente);
 		paciente.setRoles(userTypesRoles);
-		save = userRepository.save(paciente);
+		Optional.of(userRepository.findByEmail(paciente.getEmail())
+				.orElseGet(() -> userRepository.save(paciente)));
 		System.out.println("user created successfully!");
 	}
 }
