@@ -1,6 +1,8 @@
 package agendamentoAPI.postech_fase3.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 

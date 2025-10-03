@@ -1,16 +1,7 @@
 package agendamentoAPI.postech_fase3.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "users")
@@ -23,13 +14,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String phone;
+    private String nome;
+    private String cpf;
+    private String telefone;
     private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role; // MÉDICO, ENFERMEIRO, PACIENTE
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Professional professional;
 }

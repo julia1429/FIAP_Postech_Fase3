@@ -15,13 +15,6 @@ import agendamentoAPI.postech_fase3.repository.AppointmentRepository;
 import agendamentoAPI.postech_fase3.repository.ProfessionalRepository;
 import agendamentoAPI.postech_fase3.repository.UserRepository;
 
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-
 
 @Service
 
@@ -78,10 +71,10 @@ public class AppointmentService {
 
     public AppointmentDetailsDTO mapToDetailsDTO(Appointment appointment) {
        AppointmentDetailsDTO dto = new AppointmentDetailsDTO();
-       dto.setUserName(appointment.getUser().getName());
+       dto.setUserName(appointment.getUser().getNome());
        dto.setUserEmail(appointment.getUser().getEmail());
-       dto.setUserPhone(appointment.getUser().getPhone());
-       dto.setProfessionalName(appointment.getProfessional().getUser().getName());
+       dto.setUserPhone(appointment.getUser().getTelefone());
+       dto.setProfessionalName(appointment.getProfessional().getUser().getNome());
        dto.setProfessionalSpecialty(appointment.getProfessional().getSpecialty());
        dto.setAppointmentDateTime(appointment.getDateTime());
        return dto;
@@ -90,11 +83,11 @@ public class AppointmentService {
     public void delete(Long id) {
         appointmentRepository.deleteById(id);
     }
-    
+
     public List<Appointment> listAll() {
         return appointmentRepository.findAll();
     }
-    
+
     public List<Appointment> listPatientAll() {
 		AuthenticatedUser userAuth =  (AuthenticatedUser)   SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return appointmentRepository.findAllById(userAuth.getId());
