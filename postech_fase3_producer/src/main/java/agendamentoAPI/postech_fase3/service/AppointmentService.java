@@ -112,15 +112,23 @@ public class AppointmentService {
     }
 
     private void saveHistory(Appointment appointment, String status) {
-        AppointmentHistory history = AppointmentHistory.builder()
-                .appointmentId(appointment.getId())
-                .patientId(appointment.getUser().getId())
-                .doctorId(appointment.getProfessional().getId())
-                .createdAt(appointment.getCreatedAt())
-                .updatedAt("UPDATED".equals(status) ? LocalDateTime.now() : null)
-                .status(status)
-                .notes(appointment.getNotes())
-                .build();
+        AppointmentHistory history = appointmentHistoryRepository
+                .findByAppointmentId(appointment.getId())
+                .orElseGet(() -> AppointmentHistory.builder()
+                        .appointmentId(appointment.getId())
+                        .patientId(appointment.getUser().getId())
+                        .doctorId(appointment.getProfessional().getId())
+                        .createdAt(appointment.getCreatedAt())
+                        .status("CREATED")
+                        .notes(appointment.getNotes())
+                        .build()
+                );
+
+        history.setPatientId(appointment.getUser().getId());
+        history.setDoctorId(appointment.getProfessional().getId());
+        history.setNotes(appointment.getNotes());
+        history.setStatus(status);
+        history.setUpdatedAt(LocalDateTime.now());
 
         appointmentHistoryRepository.save(history);
     }
