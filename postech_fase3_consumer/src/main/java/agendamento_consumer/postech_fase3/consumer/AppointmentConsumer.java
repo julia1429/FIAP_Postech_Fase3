@@ -10,7 +10,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class    AppointmentConsumer {
+public class AppointmentConsumer {
 
     private final EmailService emailService;
 
