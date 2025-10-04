@@ -19,9 +19,12 @@ import agendamentoAPI.postech_fase3.model.User;
 public class JWTService {
 
     private final String jwtSecret;
+     
+    private final long jwtExpirationMs;
 
-    public JWTService(@Value("${security.jwt.secret}") String jwtSecret) {
+    public JWTService(@Value("${security.jwt.secret}") String jwtSecret, @Value("${security.jwt.expiration}") long jwtExpirationMs) {
         this.jwtSecret = jwtSecret;
+        this.jwtExpirationMs = jwtExpirationMs;
     }
     
     public String createToken(User user) {
@@ -30,13 +33,16 @@ public class JWTService {
                 .map(Role::getNome)
                 .toList();
     	
+    	Date now = new Date();
+    	Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
+    	
         return JWT.create()
                 .withSubject(user.getEmail())
                 .withClaim("roles", rolesList)
                 .withClaim("id", user.getId())
                 .withClaim("email", user.getEmail())
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 100 * 60 * 60)) // 100h
+                .withExpiresAt(expiryDate)
                 .sign(Algorithm.HMAC256(jwtSecret));
     }
 
