@@ -12,18 +12,35 @@ public class GatewayConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
 
-            // Rota para agendamentos
-            .route("appointments", r -> r.path("/appointments/**")
-                .filters(f -> f.rewritePath("/appointments/(?<path>.*)", "/${path}"))
-                
-                .uri("http://localhost:8081"))
+            .route("appointments", r -> r
+                .path("/appointments/**")
+                .filters(f -> f
+                    .filter((exchange, chain) -> {
+                        String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
+                        if (authHeader != null) {
+                            exchange = exchange.mutate()
+                                .request(req -> req.headers(h -> h.set("Authorization", authHeader)))
+                                .build();
+                        }
+                        return chain.filter(exchange);
+                    })
+                )
+                .uri("http://producer-app:8081"))
 
-
-            // Rota para histórico
-            .route("history", r -> r.path("/history/**")
-                .filters(f -> f.rewritePath("/history/(?<path>.*)", "/${path}"))
-
-                .uri("http://localhost:8082"))
+            .route("history", r -> r
+                .path("/history/**")
+                .filters(f -> f
+                    .filter((exchange, chain) -> {
+                        String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
+                        if (authHeader != null) {
+                            exchange = exchange.mutate()
+                                .request(req -> req.headers(h -> h.set("Authorization", authHeader)))
+                                .build();
+                        }
+                        return chain.filter(exchange);
+                    })
+                )
+                .uri("http://historico-app:8082"))
 
             .build();
     }
