@@ -2,6 +2,7 @@ package agendamentoAPI.postech_fase3.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -26,4 +27,11 @@ public class Appointment {
     @ManyToOne(optional = false)
     @JoinColumn(name = "professional_id")
     private Professional professional;
+
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = true)
+    private LocalDateTime createdAt;
 }

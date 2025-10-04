@@ -13,11 +13,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
     private String cpf;
     private String telefone;
     private String email;
+    private String senha;
 
     @Enumerated(EnumType.STRING)
     private Role role; // MÉDICO, ENFERMEIRO, PACIENTE

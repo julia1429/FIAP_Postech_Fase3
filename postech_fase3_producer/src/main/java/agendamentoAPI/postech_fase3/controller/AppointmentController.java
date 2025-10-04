@@ -36,7 +36,6 @@ public class AppointmentController {
     @PostMapping
     @PreAuthorize("hasRole('ENFERMEIRO')")
     public ResponseEntity<AppointmentDetailsDTO> create(@RequestBody AppointmentDTO dto) {
-
         AppointmentDetailsDTO details = appointmentService.create(dto);
 
         appointmentProducer.sendAppointmentMessage(details);

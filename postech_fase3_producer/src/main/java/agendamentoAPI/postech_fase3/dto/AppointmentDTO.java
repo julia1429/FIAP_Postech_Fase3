@@ -11,5 +11,6 @@ public class AppointmentDTO {
     private Long userId;
     private Long professionalId;
     private Date appointmentDateTime;
+    private String notes;
 
 }

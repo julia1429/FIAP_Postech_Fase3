@@ -3,6 +3,7 @@ package agendamentoAPI.postech_fase3.controller;
 import agendamentoAPI.postech_fase3.model.User;
 import agendamentoAPI.postech_fase3.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ENFERMEIRO')")
     public User create(@RequestBody User user) {
         return userService.create(user);
     }
