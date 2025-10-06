@@ -19,6 +19,7 @@ public class User {
     private String email;
     private String senha;
 
+    @Transient
     @Enumerated(EnumType.STRING)
     private Role role; // MÉDICO, ENFERMEIRO, PACIENTE
 }

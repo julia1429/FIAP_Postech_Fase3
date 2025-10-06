@@ -55,7 +55,7 @@ public class DataLoader implements CommandLineRunner {
 		
 		User enfermeiro = new User();
 		enfermeiro.setNome("enfermeiro");
-		enfermeiro.setEmail("enfermeiro.com.br");
+		enfermeiro.setEmail("fiap8988@gmail.com");
 		enfermeiro.setSenha(passwordEncoder.encode("123"));
 		userTypesRoles.add(roleEnfermeiro);
 		enfermeiro.setRoles(userTypesRoles);

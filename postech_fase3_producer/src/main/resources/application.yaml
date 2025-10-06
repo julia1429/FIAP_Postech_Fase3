@@ -12,14 +12,14 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: none  
+      ddl-auto: update  
     properties:
       hibernate.format_sql: true
       hibernate.jdbc.time_zone: America/Sao_Paulo
       hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
 
   flyway:
-    enabled: true
+    enabled: false
     baseline-on-migrate: false   # como o banco está vazio, não precisa baseline
     locations: classpath:db/migration
     validate-on-migrate: false

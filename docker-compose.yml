@@ -50,10 +50,12 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/challenge_fase3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Senharoot@123
+
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
+
       RABBITMQ_EXCHANGE: consultas.exchange
       RABBITMQ_QUEUE: notificacoes.queue
       RABBITMQ_ROUTINGKEY: consulta.criada
@@ -73,10 +75,37 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/challenge_fase3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Senharoot@123
+
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
+    depends_on:
+      - mysql
+      - rabbitmq
+      - gateway
+      - producer
+    networks:
+      - spring-net
+
+  consumer:
+    build: ./postech_fase3_consumer
+    container_name: consumer-app
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/challenge_fase3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Senharoot@123
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+
+      RABBITMQ_EXCHANGE: consultas.exchange
+      RABBITMQ_QUEUE: notificacoes.queue
+      RABBITMQ_ROUTINGKEY: consulta.criada
     depends_on:
       - mysql
       - rabbitmq
