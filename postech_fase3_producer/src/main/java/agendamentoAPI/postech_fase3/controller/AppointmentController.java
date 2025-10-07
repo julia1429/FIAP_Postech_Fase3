@@ -2,6 +2,7 @@ package agendamentoAPI.postech_fase3.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import agendamentoAPI.postech_fase3.dto.AppointmentDTO;
@@ -35,6 +37,7 @@ public class AppointmentController {
 
     @PostMapping
     @PreAuthorize("hasRole('ENFERMEIRO')")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AppointmentDetailsDTO> create(@RequestBody AppointmentDTO dto) {
         AppointmentDetailsDTO details = appointmentService.create(dto);
 

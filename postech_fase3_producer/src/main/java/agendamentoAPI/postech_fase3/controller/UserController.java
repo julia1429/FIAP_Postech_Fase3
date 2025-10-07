@@ -1,8 +1,11 @@
 package agendamentoAPI.postech_fase3.controller;
 
+import agendamentoAPI.postech_fase3.dto.UserRequestDTO;
 import agendamentoAPI.postech_fase3.model.User;
 import agendamentoAPI.postech_fase3.service.UserService;
+import converter.UserConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +18,14 @@ public class UserController {
 
     private final UserService userService;
 
+    private final UserConverter converter;
+
     @PostMapping
     @PreAuthorize("hasRole('ENFERMEIRO')")
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserRequestDTO create(@RequestBody User user) {
+        User saved = userService.create(user);
+        return converter.toDTO(saved);
     }
 
     @GetMapping
