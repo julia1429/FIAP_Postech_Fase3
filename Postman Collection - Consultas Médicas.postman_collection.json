@@ -1,0 +1,621 @@
+{
+	"info": {
+		"_postman_id": "066eae75-275d-4fee-bea2-bb470a78158b",
+		"name": "Postman Collection - Consultas Médicas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15232613",
+		"_collection_link": "https://fred-324508.postman.co/workspace/Personal-Workspace~f969967c-ca59-4fe8-9f34-86537053a155/collection/46899537-066eae75-275d-4fee-bea2-bb470a78158b?action=share&source=collection_link&creator=15232613"
+	},
+	"item": [
+		{
+			"name": "API-ConsultaHistorico-GraphQL",
+			"item": [
+				{
+					"name": "Listar todo histórico",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query($page:Int,$size:Int){ appointmentHistories(page:$page,size:$size){ id createdAt status }}\",\r\n  \"variables\": { \r\n    \"page\": 0, \r\n    \"size\": 5 \r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/history/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"history",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar histórico por id do histórico",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query ($id: ID!) { appointmentHistoryById(id: $id) { id appointmentId patientId doctorId status createdAt updatedAt notes } }\",\r\n  \"variables\": {\r\n    \"id\": 17\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/history/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"history",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar histórico por Id da consulta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query ($appointmentId: ID!, $page: Int!, $size: Int!) { appointmentHistoriesByAppointment(appointmentId: $appointmentId, page: $page, size: $size) { id appointmentId patientId doctorId status createdAt } }\",\r\n  \"variables\": {\r\n    \"appointmentId\": 1001,\r\n    \"page\": 0,\r\n    \"size\": 20\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/history/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"history",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar histórico por Id do paciente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query ($patientId: ID!, $page: Int!, $size: Int!) { appointmentHistoriesByPatient(patientId: $patientId, page: $page, size: $size) { id appointmentId patientId doctorId status createdAt } }\",\r\n  \"variables\": {\r\n    \"patientId\": 201,\r\n    \"page\": 0,\r\n    \"size\": 20\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/history/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"history",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar histórico por Id do médico",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query ($doctorId: ID!, $page: Int!, $size: Int!) { appointmentHistoriesByDoctor(doctorId: $doctorId, page: $page, size: $size) { id appointmentId patientId doctorId status createdAt } }\",\r\n  \"variables\": {\r\n    \"doctorId\": 301,\r\n    \"page\": 0,\r\n    \"size\": 20\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/history/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"history",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar meu histórico (paciente)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query ($page: Int!, $size: Int!) { myAppointments(page: $page, size: $size) { id appointmentId patientId doctorId status createdAt } }\",\r\n  \"variables\": {\r\n    \"page\": 0,\r\n    \"size\": 20\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/history/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"history",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "API-Gateway-SpringSecurity",
+			"item": [
+				{
+					"name": "Login Medico",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.text();\r",
+									"if(jsonData) { \r",
+									"  pm.environment.set(\"token\", jsonData);\r",
+									"  pm.collectionVariables.set(\"token\", jsonData)\r",
+									"  console.log('token salvo')\r",
+									"}else{\r",
+									"    console.log('token nao salvo')\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identificador\" : \"medico.com.br\",\n    \"password\" : \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Paciente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.text();\r",
+									"if(jsonData) { \r",
+									"  pm.environment.set(\"token\", jsonData);\r",
+									"  pm.collectionVariables.set(\"token\", jsonData)\r",
+									"  console.log('token salvo')\r",
+									"}else{\r",
+									"    console.log('token nao salvo')\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identificador\" : \"paciente.com.br\",\n    \"password\" : \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Enfermeiro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.text();\r",
+									"if(jsonData) { \r",
+									"  pm.environment.set(\"token\", jsonData);\r",
+									"  pm.collectionVariables.set(\"token\", jsonData)\r",
+									"  console.log('token salvo')\r",
+									"}else{\r",
+									"    console.log('token nao salvo')\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identificador\" : \"fiap8988@gmail.com\",\n    \"password\" : \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consultas-Medicas",
+			"item": [
+				{
+					"name": "Nova consulta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"professionalId\": 1,\r\n    \"appointmentDateTime\": \"2025-10-05T14:30:00\",\r\n    \"notes\": \"Paciente com dor de cabeça recorrente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar consulta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbmZlcm1laXJvLmNvbS5iciIsInJvbGVzIjpbIkVORkVSTUVJUk8iXSwiaWQiOjIsImVtYWlsIjoiZW5mZXJtZWlyby5jb20uYnIiLCJpYXQiOjE3NTk2MTI1MDQsImV4cCI6MTc1OTYxNjEwNH0.gHM0DpTW_H3l8ZMLwU2R29WboYkB0QCmt64wPb8TSNw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"professionalId\": 1,\r\n    \"appointmentDateTime\": \"2025-10-05T14:30:00\",\r\n    \"notes\": \"Paciente com dor na coluna UPDATE2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/appointments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"appointments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar consulta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 0,\r\n    \"professionalId\": 0,\r\n    \"appointmentDateTime\": \"2025-10-03T02:38:30.460Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbmZlcm1laXJvLmNvbS5iciIsInJvbGVzIjpbIkVORkVSTUVJUk8iXSwiaWQiOjIsImVtYWlsIjoiZW5mZXJtZWlyby5jb20uYnIiLCJpYXQiOjE3NTk2MDQwMDksImV4cCI6MTc1OTYwNzYwOX0.UaMXb9p6wERUfu34RUIRi377ksGVEFm6A3VOqtoK4Ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"João da Silva\",\r\n    \"cpf\": \"123.456.789-00\",\r\n    \"telefone\": \"11999999999\",\r\n    \"email\": \"joao.silva@email.com\",\r\n    \"senha\": \"987654321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
+		}
+	]
+}
