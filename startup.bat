@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 :: --- CONFIGURAÇÕES ---
 set MAIN_REPO=https://github.com/julia1429/FIAP_Postech_Fase3
-set MAIN_BRANCH=feat_auth
+set MAIN_BRANCH=master
 set SUB_REPO=https://github.com/LuccaMeurer/postech_fase3_historico_GraphQL
 
 echo 🚀 Clonando repositório principal...
